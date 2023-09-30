@@ -1,0 +1,16 @@
+*~
+*.swp
+*.bmp
+*.bak*
+# MPLAB X IDE
+build/
+dist/
+**/nbproject/private/ 
+*.mk
+*.properties
+.generated_files/
+# debugger
+*.log
+*.log.inx
+# Exports from PCB Express
+*.bmp
