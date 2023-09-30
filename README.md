@@ -71,6 +71,7 @@ Additionally you should download WM8510 codec datasheet (hard to get!):
 Problems to overcome:
 * all sources are for all MPLAB IDE (not X)
 * all sources are for C30
+* no MCC tool available for this [dsPIC33FJ256GP506][dsPIC33FJ256GP506]
 * undocumented signal connectors J2, J3 and J4
 * undocumented codec source `SASK WM8510 Record Play Demo for SST.zip`
 * provided source code has more restrictive (but still usable)
@@ -85,6 +86,14 @@ any person or entity by or on your behalf, exclusively with Microchip's
 proprietary products.  Your acceptance and/or use of this code constitutes
 agreement to the terms and conditions of this notice.
 ```
+
+# Existing projects
+
+* [swleds.X/](swleds.X/) - trivial switches and LEDs to test
+  programmer and board:
+  - RED LED blinking using `__delay_ms()`
+  - AMBER LED copies S1 state
+  - GREEN LED copies S2 state
 
 # Questions
 
@@ -101,3 +110,5 @@ Reading Target...
 done
 ```
 
+
+[dsPIC33FJ256GP506]: https://www.microchip.com/en-us/product/dsPIC33FJ256GP506
