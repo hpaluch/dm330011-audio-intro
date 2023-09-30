@@ -252,73 +252,108 @@ void WM8510SampleRate8KConfig(WM8510Handle *codecHandle)
 	commandValue = 1;		/* Any value can be written to reset the codec	*/
 	result = WM8510IOCtl(codecHandle,WM8510_SOFTWARE_RESET, 	(void *) &commandValue);
 	if (result == -1) while(1);
+    //         bit   876543210 Reg1
+    //                 65 3210 MIC2EN= PLLEN BIASEN BUFIOEN, VMID=5kOhm
 	commandValue = 0b001101111;		
 	WM8510IOCtl(codecHandle,WM8510_POWER_MGMT1, 		(void *) &commandValue);
 	if (result == -1) while(1);
+    //         bit   876543210 Reg2
+    //                   4 2 0 BOOSTEN INPPGAEN ADCEN
 	commandValue = 0b000010101;
 	WM8510IOCtl(codecHandle,WM8510_POWER_MGMT2, 		(void *) &commandValue);
 	if (result == -1) while(1);
+    //         bit   876543210 Reg3
+    //                7   3  0 MONOEN MONOMIXEN DACEN
 	commandValue = 0b010001001;
 	WM8510IOCtl(codecHandle,WM8510_POWER_MGMT3, 		(void *) &commandValue);
 	if (result == -1) while(1);
+    //         bit   876543210 Reg4
+    //                   43    BCP=normal FRAMEP=normal, WL=16-bit, FMT=PCM, ADC/DAC in left frame
 	commandValue = 0b000011000;
 	WM8510IOCtl(codecHandle,WM8510_AUDIO_INTERFACE, 	(void *) &commandValue);
 	if (result == -1) while(1);
+    //         bit   876543210 Reg6
+    //               87 5 3  0 CLKSEL=PLL Output, MCLKDIV=/6, BCLKDIV=/4, MS=Codce is Master(!)
 	commandValue = 0b110101001;
 	WM8510IOCtl(codecHandle,WM8510_CLOCKGEN_CTRL, 		(void *) &commandValue);
 	if (result == -1) while(1);
+    //         bit   876543210 Reg7
+    //                    3  1 SampleRate=8kHz, Slow Clock Enable
 	commandValue = 0b000001010;
 	WM8510IOCtl(codecHandle,WM8510_ADDITIONAL_CTRL, 	(void *) &commandValue);
 	if (result == -1) while(1);
+    //         bit   876543210 Reg8
+    //                     2   OPCLKDIV=/1 GPIOPOL=Normal, GPIOSEL=PLL CLK o/p
 	commandValue = 0b000000100;
 	WM8510IOCtl(codecHandle,WM8510_GPIO_STUFF, 			(void *) &commandValue);
 	if (result == -1) while(1);
+    //         bit   876543210 Reg14
+    //               8    3    HPFEN HPFAPP=0 HPFCUT=000 ADCOSR128 ADCPOL=normal
 	commandValue = 0b100001000;
 	WM8510IOCtl(codecHandle,WM8510_ADC_CONTROL	, 		(void *) &commandValue);
 	if (result == -1) while(1);
-		
+    //         bit   876543210 Reg27
+    //                 6       bits6:0=NFA0[13:7]
 	commandValue = 0b001000000;
 	WM8510IOCtl(codecHandle,WM8510_NOTCH_FILTER1, 		(void *) &commandValue);
 	if (result == -1) while(1);
-	
+    //         bit   876543210 Reg28
+    //                     2 0 bits6:0=NFA0[6:0]
 	commandValue = 0b000000101;
 	WM8510IOCtl(codecHandle,WM8510_NOTCH_FILTER2, 		(void *) &commandValue);
 	if (result == -1) while(1);
-	
+    //         bit   876543210 Reg29
+    //                  543210 bit6-0: NFA1[13:7]
 	commandValue = 0b000111111;
 	WM8510IOCtl(codecHandle,WM8510_NOTCH_FILTER3, 		(void *) &commandValue);
 	if (result == -1) while(1);
-	
+    //         bit   876543210 Reg30
+    //                 65432 0 bit6-0: NFA1[6:0]
 	commandValue = 0b001111101;
 	WM8510IOCtl(codecHandle,WM8510_NOTCH_FILTER4, 		(void *) &commandValue);
 	if (result == -1) while(1);
-	
+    //         bit   876543210 Reg30
+    //               8         Update whole NFA0 & NFA1
 	commandValue = 0b100000000;
 	WM8510IOCtl(codecHandle,WM8510_NOTCH_FILTER4, 		(void *) &commandValue);
 	if (result == -1) while(1);
-	
+    //         bit   876543210 Reg36
+    //                   43    PLLPRESCALE=MCLK/2 PLLN=8
 	commandValue = 0b000011000;
 	WM8510IOCtl(codecHandle,WM8510_PLL_N, 				(void *) &commandValue);
 	if (result == -1) while(1);
+    //         bit   876543210 Reg37
+    //                  xxxxxx bits[5:0]=PLLK[23:18]=12dec
 	commandValue = 0b000001100;
 	WM8510IOCtl(codecHandle,WM8510_PLL_K1, 				(void *) &commandValue);
 	if (result == -1) while(1);
+    //         bit   876543210 Reg38
+    //               xxxxxxxxx bits[8:0]=PLLK[17:9]=X
 	commandValue = 0b010010011;
 	WM8510IOCtl(codecHandle,WM8510_PLL_K2, 				(void *) &commandValue);
 	if (result == -1) while(1);
+    //         bit   876543210 Reg39
+    //               xxxxxxxxx bits[8:0]=PLLK[8:0]=X
 	commandValue = 0b011101001;
 	WM8510IOCtl(codecHandle,WM8510_PLL_K3, 				(void *) &commandValue);
+    // Complete PLL K should be (24-bits):
+    // 0b001100010010011011101001, 0x3126E9?, 3,221,225? dec
 	if (result == -1) while(1);
+    //         bit   876543210 Reg44
+    //                     2   Mic settings
 	commandValue = 0b000000100;
 	WM8510IOCtl(codecHandle,WM8510_INPUT_CTRL, 			(void *) &commandValue);
 	if (result == -1) while(1);
+    //         bit   876543210 Reg47
+    //                         Microphone and input boost
 	commandValue = 0b000000000;
 	WM8510IOCtl(codecHandle,WM8510_ADC_BOOST_CTRL, 	(void *) &commandValue);
 	if (result == -1) while(1);
+    //         bit   876543210 Reg56
+    //                       0 DAC2MONO=1 Output DAC to Mono mixer
 	commandValue = 0b000000001;
 	WM8510IOCtl(codecHandle,WM8510_MONO_MIXER_CTRL,	 (void *) &commandValue);
 	if (result == -1) while(1);
-
 }
 
 void WM8510SampleRate16KConfig(WM8510Handle *codecHandle)
