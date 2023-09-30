@@ -22,13 +22,24 @@ Please note that somehow this board has bad destiny:
   on: https://www.microchipdirect.com/dev-tools/DM330011?allDevTools=true -
   as of Sep 30 2023, there were 47 items in stock
 
-So if you are willing to take big unnecessary risk, go on!
+* Also it is not supported by MCC tool. If you try it on fresh project
+  you will get something like:
+
+  ![MCC not supported](assets/mcc-not-supported.gif)
+
+  along with "helpful" advice:
+
+  > How to fix this: change your project device to one supported by
+  > the MCC content types.
+
+However if you are like me and still willing to take big unnecessary risk, go
+on!
 
 In what sense is this board unique?
 You can test and compare two distinct methods of processing audio signal:
 
-a) using Audio CODEC Wolfson WM8510 
-b) using regular ADC with anti-alias filter for input and PWM
+1. using Audio CODEC Wolfson WM8510 
+2. using regular ADC with anti-alias filter for input and PWM
    with filter for output.
 
 Theoretically you may even mix these two (for example using ADC to sample audio
@@ -75,5 +86,18 @@ proprietary products.  Your acceptance and/or use of this code constitutes
 agreement to the terms and conditions of this notice.
 ```
 
+# Questions
 
+The on-board programmers behaves in specific way.
+It is identified as `SKDE 33 AUDIO S.No : BUR....`
+
+When attempting to read Device-ID only very limited output is given:
+```
+Initializing...
+Initialization succesful...
+Firmware Version: 0.0.25
+Firmware Version: 0.0.25
+Reading Target...
+done
+```
 
