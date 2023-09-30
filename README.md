@@ -68,12 +68,14 @@ Mirror of Product page:
 Additionally you should download WM8510 codec datasheet (hard to get!):
 * https://www.tme.eu/Document/40de4947cc4286a2a792635da67be5ff/wm8510.pdf
 
-Problems to overcome:
-* all sources are for all MPLAB IDE (not X)
-* all sources are for C30
-* no MCC tool available for this [dsPIC33FJ256GP506][dsPIC33FJ256GP506]
+Problems to mention:
+* ~~all sources are for all MPLAB IDE (not X)~~ - solved - see projects below
+* ~~all sources are for C30~~ - solved - just replaced dsPIC headers with `xc.h`
+* no MCC tool available for this [dsPIC33FJ256GP506][dsPIC33FJ256GP506] - seems
+  to affect most dsPIC33FJ (even one on my Microstick II board).
 * undocumented signal connectors J2, J3 and J4
-* undocumented codec source `SASK WM8510 Record Play Demo for SST.zip`
+* undocumented codec source `SASK WM8510 Record Play Demo for SST.zip`,
+  but now I'm able to generate chainsaw - project [tone.X/](tone.X/)
 * provided source code has more restrictive (but still usable)
   Microchip license, quoting:
 
@@ -86,6 +88,9 @@ any person or entity by or on your behalf, exclusively with Microchip's
 proprietary products.  Your acceptance and/or use of this code constitutes
 agreement to the terms and conditions of this notice.
 ```
+
+That license is actually similar to many (unnamed) ARM Cortex-M vendors... I
+can live with that.
 
 # Existing projects
 
