@@ -99,8 +99,12 @@ agreement to the terms and conditions of this notice.
   - produces simple chainsaw tone `/|/|/|` using codec WM8510.
   - audio can be (un)muted with switch S1
   - muted audio signaled with Amber (Yellow) LED
+  - headphones output on scope - frequency is correct (250 Hz), but
+    linearity is logarithmic:
 
-TODO: Verify amplitude and frequency (should be 250 Hz).
+    ![Tone chainsaw scope](tone.X/digilentad2/dsPIC-SASK-Chainsaw.gif)
+
+    Workspace file: [tone.X/digilentad2/dsPIC-SASK-Chainsaw.dwf3work](tone.X/digilentad2/dsPIC-SASK-Chainsaw.dwf3work])
 
 # Questions
 

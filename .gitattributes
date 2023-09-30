@@ -10,3 +10,4 @@ Makefile text eol=lf
 *.sch filter=lfs diff=lfs merge=lfs -text
 *.png filter=lfs diff=lfs merge=lfs -text
 *.s filter=lfs diff=lfs merge=lfs -text
+*.dwf3work filter=lfs diff=lfs merge=lfs -text
