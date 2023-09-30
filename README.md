@@ -95,6 +95,13 @@ agreement to the terms and conditions of this notice.
   - AMBER LED copies S1 state
   - GREEN LED copies S2 state
 
+* [tone.X/](tone.X/)
+  - produces simple chainsaw tone `/|/|/|` using codec WM8510.
+  - audio can be (un)muted with switch S1
+  - muted audio signaled with Amber (Yellow) LED
+
+TODO: Verify amplitude and frequency (should be 250 Hz).
+
 # Questions
 
 The on-board programmers behaves in specific way.
