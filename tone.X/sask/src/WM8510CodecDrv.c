@@ -1,4 +1,5 @@
-#include "..\h\WM8510CodecDrv.h"
+
+#include "../../ex_system.h"
 
 WM8510Handle *thisWM8510Codec;
 

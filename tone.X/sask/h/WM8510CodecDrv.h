@@ -1,12 +1,6 @@
 #ifndef _WM8510CODECDRV_H_
 #define  _WM8510CODECDRV_H_
 
-#if defined(__dsPIC33F__)
-#include "p33fxxxx.h"
-#elif defined(__dsPIC30F__)
-#include "p30fxxxx.h"
-#endif
-
 #define WM8510DRV_DCI_MASTER 				1
 #define WM8510DRV_CODEC_FRAME 				128
 #define WM8510DRV_DRV_BUFFER_SIZE			(WM8510DRV_CODEC_FRAME * 4)

@@ -35,7 +35,7 @@
 * certify, or support the code.
 ************************************************************************/
 
-#include "..\h\sask.h"
+#include "../../ex_system.h"
 
 int debounceS1;						/* Debounce counter for switch S1	*/
 int debounceS2;						/* Debounce counter for switch S2	*/

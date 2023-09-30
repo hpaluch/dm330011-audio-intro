@@ -36,7 +36,7 @@
 ************************************************************************/
 #ifndef __SASK_BOARD_H__
 #define __SASK_BOARD_H__
-#include <p33Fxxxx.h>
+// #include <p33Fxxxx.h>
 
 /* The LEDS and their ports	*/
 #define YELLOW_LED_TRIS		_TRISC13
