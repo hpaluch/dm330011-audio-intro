@@ -75,7 +75,8 @@ Problems to mention:
   to affect most dsPIC33FJ (even one on my Microstick II board).
 * undocumented signal connectors J2, J3 and J4
 * undocumented codec source `SASK WM8510 Record Play Demo for SST.zip`,
-  but now I'm able to generate chainsaw - project [tone.X/](tone.X/)
+  but now I'm able to generate sine and chainsaw waveform -
+  project [tone.X/](tone.X/)
 * provided source code has more restrictive (but still usable)
   Microchip license, quoting:
 
@@ -102,6 +103,8 @@ can live with that.
 
 * [tone.X/](tone.X/)
   - produces Sine or chainsaw tone `/|/|/|` at 250 Hz using codec WM8510.
+  - we use 8 000 Hz sample rate (based on original SASK demo),
+    so one period of signal has 32 samples for 250 Hz ( 8000/250 = 32 ).
   - audio can be (un)muted with switch S1 - signaled with Amber (Yellow) LED
   - use switch S2 to change pattern ( sine <-> chainsaw, default sine)
   - scope connected to Headphones output:
