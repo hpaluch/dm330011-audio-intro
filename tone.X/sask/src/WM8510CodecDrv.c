@@ -354,6 +354,10 @@ void WM8510SampleRate8KConfig(WM8510Handle *codecHandle)
 	commandValue = 0b000000001;
 	WM8510IOCtl(codecHandle,WM8510_MONO_MIXER_CTRL,	 (void *) &commandValue);
 	if (result == -1) while(1);
+
+	commandValue = WM8510DRV_MAX_VOLUME; // Max Volume before limiter clipping
+	WM8510IOCtl(codecHandle,WM8510_DAC_VOLUME, (void *) &commandValue);
+	if (result == -1) while(1);
 }
 
 void WM8510SampleRate16KConfig(WM8510Handle *codecHandle)

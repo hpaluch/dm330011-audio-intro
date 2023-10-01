@@ -1,20 +1,28 @@
 /*
  * File:  tone.X/main.c
- *      Plays simple chainsaw pattern on Codec output.
- *      Use switch S1 to mute/unmute audio (muted Audio signaled with 
- *      Amber LED)
- *      top of Microchips "SASK WM8510 Record Play Demo for SST.zip"
- *      with latest MPLAB X IDE v6.15 and XC16 v2.10
+ * Function:
+ *      - Plays Sine() or chainsaw pattern /|/|/| on Codec output at 250 Hz
+ *      - Use switch S1 to mute/unmute audio (muted Audio signaled with
+ *        Amber LED)
+ *      - Use switch S2 to change pattern (default Sine alternative Chainsaw)
  *
- * Most code comes from sask/src/main.c from Micriochips example.
+ *      This demo was created from  Microchip example:
+ *      "SASK WM8510 Record Play Demo for SST.zip"
+ *      Code in this main.c is based on sask/src/main.c
+ *      Using latest MPLAB X IDE v6.15 and XC16 v2.10 (original was MPLAB + C30)
+ *
  * Created on September 30, 2023
  */
 
 // example system.h - main include file
 #include "ex_system.h"
+#include <libq.h> // sinPI(Q15)
+#include <stdbool.h> // bool, true, false
 
 // for sample rate 8 000 Hz, we should produce 250 Hz chainsaw pattern /|/|/|
-#define CHAINSAW_INCREMENT 32768/32
+#define CHAINSAW_INCREMENT 2048
+// 250 Hz for Sine
+#define SINE_INCREMENT 2048
 #define FRAME_SIZE 				128			/* Each audio frame will have these many samples	*/
 
 /* Allocate memory for buffers and drivers	*/
@@ -51,6 +59,10 @@ uint16_t gCounter=0;
 
 int main(void) {
     uint16_t i;
+    int chainsaw=0;
+    _Q15 qAnglePi=0; // angle times Pi
+    bool bSineWaveform = true;
+    
     CLOCK_Initialize();
     /* Initialize the board and the drivers	*/
 	SASKInit();
@@ -66,9 +78,18 @@ int main(void) {
 			WM8510Read(codecHandle,samples,FRAME_SIZE);
             // we actually ignore these read "samples" in our project...
 
-            // fill trivial chainsaw pattern /|/|/|
+            qAnglePi = -32768; // = -1.0000 in Q1.15
+            chainsaw = -32768; // minimum signed integer value
             for(i=0;i!=FRAME_SIZE;i++){
-                decodedSamples[i] = (i * CHAINSAW_INCREMENT) & 32767;
+                if (bSineWaveform){
+                    // sin() pattern using very fast Q1.15 version
+                    decodedSamples[i] = _Q15sinPI(qAnglePi);
+                    qAnglePi += SINE_INCREMENT;
+                } else {
+                    // fill trivial chainsaw pattern /|/|/|
+                    decodedSamples[i] = chainsaw;
+                    chainsaw += CHAINSAW_INCREMENT;
+                }
             }
             
   			/* Wait till the codec is available for a new  frame	*/
@@ -84,12 +105,14 @@ int main(void) {
                 YELLOW_LED ^= 1;
                 // press S1 to mute/unmute audio
                 if (YELLOW_LED){
-                    commandValue = 0xff; // full volume
+                    commandValue = WM8510DRV_MAX_VOLUME; // max volume without clipping
                 } else {
                     commandValue = 1; // mute
                 }
 				WM8510IOCtl(codecHandle,WM8510_DAC_VOLUME,	 (void *) &commandValue);
-
+            }
+            if (CheckSwitchS2()){
+                bSineWaveform = !bSineWaveform;
             }
     }
     return 0;

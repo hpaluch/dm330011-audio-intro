@@ -101,15 +101,24 @@ can live with that.
   - GREEN LED copies S2 state
 
 * [tone.X/](tone.X/)
-  - produces simple chainsaw tone `/|/|/|` using codec WM8510.
-  - audio can be (un)muted with switch S1
-  - muted audio signaled with Amber (Yellow) LED
-  - headphones output on scope - frequency is correct (250 Hz), but
-    linearity is logarithmic:
+  - produces Sine or chainsaw tone `/|/|/|` at 250 Hz using codec WM8510.
+  - audio can be (un)muted with switch S1 - signaled with Amber (Yellow) LED
+  - use switch S2 to change pattern ( sine <-> chainsaw, default sine)
+  - scope connected to Headphones output:
+  - sine has really nice weaveform (however had to limit volume to 0xfd instead
+    of 0xff to avoid Limiter clipping).
+
+    ![Tone Sine scope](tone.X/digilentad2/dsPIC-SASK-Sine.gif)
+
+    Workspace file: [tone.X/digilentad2/dsPIC-SASK-Sine.dwf3work](tone.X/digilentad2/dsPIC-SASK-Sine.dwf3work)
+
+  - but chainsaw is problematic - it should be linear but is logarithmic:
 
     ![Tone chainsaw scope](tone.X/digilentad2/dsPIC-SASK-Chainsaw.gif)
 
     Workspace file: [tone.X/digilentad2/dsPIC-SASK-Chainsaw.dwf3work](tone.X/digilentad2/dsPIC-SASK-Chainsaw.dwf3work])
+
+  - it seems that oversampling kicks in too much in case of chainsaw...
 
 # Questions
 

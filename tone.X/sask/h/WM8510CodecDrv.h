@@ -20,6 +20,10 @@
 #define	WM8510DRV_I2C_TRISSCL _TRISG2
 #define 	WM8510DRV_I2C_TRISSDA _TRISG3
 
+// maximum Volume to avoid Limiter clip-off
+// found experimentally...
+#define WM8510DRV_MAX_VOLUME 0xfd
+
 typedef union uCommandValueWord
 {
 	int wordValue;
